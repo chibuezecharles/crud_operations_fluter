@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';      
-import 'todo_list.dart'; 
+import 'controller.dart';
+import 'todo_list.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-  final controller = Get.put(Controller());
+    final controller = Get.put(Controller());
 
     return Obx(
       () => Scaffold(
@@ -28,12 +28,20 @@ class Home extends StatelessWidget {
               ),
           ],
         ),
-        body: Center(
-          child: SizedBox(
-            width: context.width / 1.5,
-            child: controller.todos.isEmpty
-                ? const CircularProgressIndicator()
-                : TodosList(),
+        body: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: context.width / 1.5,
+              child: controller.todos.isEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: TodosList(), // This ListView is already scrollable
+                    ),
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
