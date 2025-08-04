@@ -26,7 +26,7 @@ class Controller extends GetxController {
     final response = await connect.get(baseUrl);
     if (response.statusCode == 200) {
       final List list = response.body;
-      for (var item in list.take(50)) { 
+      for (var item in list.take(20)) { 
         final todo = Todo.fromJson(item);
         todos[todo.id!] = todo;
       }
